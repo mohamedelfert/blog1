@@ -20,6 +20,7 @@ class CreateUsersModelsTable extends Migration
             $table->integer('age');
             $table->string('email');
             $table->string('phone');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

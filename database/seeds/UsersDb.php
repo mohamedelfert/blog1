@@ -17,7 +17,7 @@ class UsersDb extends Seeder
             $add->address = 'User_address ' . rand();
             $add->age = rand(0,15);
             $add->email = 'User_email@ ' . rand();
-            $add->phone = 'User_phone ' . rand();
+            $add->phone = '011542' . random_int(02134,20381);
             $add->save();
         }
     }

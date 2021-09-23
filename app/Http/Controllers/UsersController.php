@@ -9,21 +9,32 @@ class UsersController extends Controller
 {
     public function all_users(){
 //        $users = UsersModel::orderBy('id','desc')->get();
-        $users = UsersModel::orderBy('id','desc')->paginate(5);
 //        $users = UsersModel::orderBy('id','desc')->get(['id','username','address']);
-        return view('users.all_users',compact('users'));
+        $users         = UsersModel::withTrashed()->orderBy('id','desc')->paginate(10);
+        $trashed_users = UsersModel::onlyTrashed()->orderBy('id','desc')->paginate(10);
+        return view('users.all_users',compact('users','trashed_users'));
     }
 
     public function insert_new(){
-        UsersModel::create([
 //        UsersModel::firstOrCreate
+//        UsersModel::create([
+        $data = $this->validate(\request(),[
+            'username' => 'required|min:4|max:10',
+            'address'  => 'required',
+            'age'      => 'required|int|min:20|max:45',
+            'email'    => 'required|email',
+            'phone'    => 'required',
+        ]);
+
+        UsersModel::create($data);
+
 //        UsersModel::updateOrCreate([
-            'username'=>\request('username'),
-            'address'=>\request('address'),
-            'age'=>\request('age'),
-            'email'=>\request('email'),
-            'phone'=>\request('phone')
-            ]);
+//            'username'=>\request('username'),
+//            'address' =>\request('address'),
+//            'age'     =>\request('age'),
+//            'email'   =>\request('email'),
+//            'phone'   =>\request('phone')
+//            ]);
 //        $user = new UsersModel;
 //        $user->username = \request('username');
 //        $user->address = \request('address');
@@ -44,10 +55,13 @@ class UsersController extends Controller
         if ($id != null){
             $del = UsersModel::find($id);
             $del->delete();
-        }elseif (\request()->has('id')){
+        }elseif (\request()->has('restore') and \request()->has('id')){
+            UsersModel::whereIn('id',\request('id'))->restore();
+        }elseif (\request()->has('forcedelete') and \request()->has('id')){
+            UsersModel::whereIn('id',\request('id'))->forceDelete();
+        }elseif (\request()->has('delete') and \request()->has('id')){
             UsersModel::destroy(\request('id'));
         }
-
         return redirect('users/');
     }
 }
