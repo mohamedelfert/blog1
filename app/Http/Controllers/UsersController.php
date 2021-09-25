@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\UsersModel;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class UsersController extends Controller
 {
@@ -18,15 +19,25 @@ class UsersController extends Controller
     public function insert_new(){
 //        UsersModel::firstOrCreate
 //        UsersModel::create([
+        $attr = [
+            'username' => trans('users.username'),
+            'address'  => trans('users.address'),
+            'age'      => trans('users.age'),
+            'email'    => trans('users.email'),
+            'phone'    => trans('users.phone')
+        ];
         $data = $this->validate(\request(),[
             'username' => 'required|min:4|max:10',
             'address'  => 'required',
             'age'      => 'required|int|min:20|max:45',
             'email'    => 'required|email',
-            'phone'    => 'required',
-        ]);
+            'phone'    => 'required'
+        ],[],$attr);
 
         UsersModel::create($data);
+//        session()->put('message','All Data Saved Successfully');
+//        session()->flash('message','All Data Saved Successfully');
+        session()->push('message',['success' => 'data hase been saved successfully']);
 
 //        UsersModel::updateOrCreate([
 //            'username'=>\request('username'),

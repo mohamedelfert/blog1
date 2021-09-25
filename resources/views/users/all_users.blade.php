@@ -87,6 +87,15 @@
                 </div>
             @endif
         </div>
+        <div class="col-lg-4" style="float: right">
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+{{--                {{session()->get('message')}}--}}
+                {{session()->get('message')[0]['success']}}
+                {{session()->forget('message')}}
+            </div>
+            @endif
+        </div>
 
         <div class="clearfix"></div>
 
