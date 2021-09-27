@@ -13,7 +13,7 @@ class NewsController extends Controller
 //        $news = NewsModel::orderBy('id','desc')->get(['id','title','content']);
         $news         = NewsModel::withTrashed()->orderBy('id','desc')->paginate(10);
         $trashed_news = NewsModel::onlyTrashed()->orderBy('id','desc')->paginate(10);
-        return view('news.news',compact('news','trashed_news'));
+        return view('news.all_news',compact('news','trashed_news'));
     }
 
     public function insert_new(){
@@ -27,7 +27,7 @@ class NewsController extends Controller
             'status'        => trans('news.status')
         ];
         $data = $this->validate(\request(),[
-            'title'    => 'required|min:5|max:15',
+            'title'    => 'required|min:5|max:50',
             'desc'     => 'required',
             'add_by'   => 'required|int',
             'content'  => 'required',

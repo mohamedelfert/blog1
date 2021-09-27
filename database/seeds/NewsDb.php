@@ -14,9 +14,9 @@ class NewsDb extends Seeder
         for ($i = 0; $i < 20; $i++){
             $add = new \App\NewsModel();
             $add->title = 'Test_' . rand();
-            $add->add_by = 'User_id_ ' . rand();
+            $add->add_by = rand();
             $add->desc = rand(0,15);
-            $add->content = 'User_email@ ' . rand();
+            $add->content = 'News_Content_ ' . rand();
             $add->status = 'active';
             $add->save();
         }
