@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UsersModel extends Model
+class NewsModel extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['id','username','address','age','email','phone'];
+    protected $fillable = ['title','desc','add_by','content','status'];
     protected $date = ['deleted_at'];
 }

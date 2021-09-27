@@ -17,11 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('users','UsersController@all_users');
-Route::post('insert/user','UsersController@insert_new');
-Route::delete('delete/user/{id?}','UsersController@delete')->where('id','[0-9]+');
+Route::get('news','NewsController@all_news');
+Route::post('insert/news','NewsController@insert_new');
+Route::delete('delete/news/{id?}','NewsController@delete')->where('id','[0-9]+');
 
-//Route::resource('users' , 'UsersController');
+//Route::resource('news' , 'NewsController');
 //Route::get('test', 'NewsController@index');
 //Route::post('test/1', function (Illuminate\Http\Request $request){
 //    return $request->all();

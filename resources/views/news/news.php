@@ -17,7 +17,7 @@
     <div class="content">
         <div class="col-lg-4" style="float: left">
 
-            {!! Form::open(['url'=>'insert/user']) !!}
+            {!! Form::open(['url'=>'insert/news']) !!}
             <div class="mb-3">
                 {!! Form::label('exampleFormControlInput1','UserName',['class'=>'form-label']) !!}
                 {!! Form::text('username',old('username'),['class'=>'form-control','id'=>'exampleFormControlInput1','placeholder'=>'Your Name']) !!}
@@ -40,7 +40,7 @@
             {!! Form::close() !!}
 
 
-{{--            <form method="post" action="{{ url('insert/user') }}">--}}
+{{--            <form method="post" action="{{ url('insert/news') }}">--}}
 {{--                <input type="hidden" name="_token" value="{{csrf_token()}}">--}}
 {{--                <div class="mb-3">--}}
 {{--                    <label for="exampleFormControlInput1" class="form-label">UserName</label>--}}
@@ -95,15 +95,14 @@
 
         <div class="card-header card-header-warning col-lg-12" style="margin-bottom: 5px">
             <h4 class="card-title text-center">All Users</h4>
-            <form method="post" action="{{ url('delete/user') }}">
+            <form method="post" action="{{ url('delete/news') }}">
                 <table class="table table-striped">
                     <tr>
                         <th>Id</th>
-                        <th>Username</th>
-                        <th>Address</th>
-                        <th>Age</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Add By</th>
+                        <th>Content</th>
                         <th>Status</th>
                         <th>Select</th>
                     </tr>
@@ -125,19 +124,19 @@
         {{--                </tr>--}}
         {{--            @endforeach--}}
 
-                        @foreach($users as $user)
+                        @foreach($news as $new)
                             <tr>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->username}}</td>
-                                <td>{{$user->address}}</td>
-                                <td>{{$user->age}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->phone}}</td>
-                                <td>{{!empty($user->deleted_at)?'Trashed':'Published'}}</td>
+                                <td>{{$new->id}}</td>
+                                <td>{{$new->title}}</td>
+                                <td>{{$new->desc}}</td>
+                                <td>{{$new->add_by}}</td>
+                                <td>{{$new->content}}</td>
+                                <td>{{$new->status}}</td>
+                                <td>{{!empty($new->deleted_at)?'Trashed':'Published'}}</td>
                                 <td>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="checkbox" name="id[]" value="{{$user->id}}">
+                                    <input type="checkbox" name="id[]" value="{{$new->id}}">
                                 </td>
                             </tr>
                         @endforeach
