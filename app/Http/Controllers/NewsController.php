@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\NewsModel;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use MongoDB\Driver\Session;
 
@@ -11,30 +12,34 @@ class NewsController extends Controller
     public function all_news(){
 //        $news = NewsModel::orderBy('id','desc')->get();
 //        $news = NewsModel::orderBy('id','desc')->get(['id','title','content']);
-        $news         = NewsModel::withTrashed()->orderBy('id','desc')->paginate(10);
+        $all_news        = NewsModel::withTrashed()->orderBy('id','desc')->paginate(10);
         $trashed_news = NewsModel::onlyTrashed()->orderBy('id','desc')->paginate(10);
-        return view('news.all_news',compact('news','trashed_news'));
+        return view('news.all_news',compact('all_news','trashed_news'));
     }
 
-    public function insert_new(){
+    public function insert_new(Request $request){
 //        NewsModel::firstOrCreate
 //        NewsModel::create([
-        $attr = [
-            'title'         => trans('news.title'),
-            'desc'          => trans('news.desc'),
-            'add_by'        => trans('news.add_by'),
-            'content'       => trans('news.content'),
-            'status'        => trans('news.status')
-        ];
-        $data = $this->validate(\request(),[
-            'title'    => 'required|min:5|max:50',
-            'desc'     => 'required',
-            'add_by'   => 'required|int',
-            'content'  => 'required',
-            'status'   => 'required'
-        ],[],$attr);
+        if ($request->ajax()){
+            $attr = [
+                'title'         => trans('news.title'),
+                'desc'          => trans('news.desc'),
+                'add_by'        => trans('news.add_by'),
+                'content'       => trans('news.content'),
+                'status'        => trans('news.status')
+            ];
+            $data = $this->validate(\request(),[
+                'title'    => 'required|min:5|max:50',
+                'desc'     => 'required',
+                'add_by'   => 'required|int',
+                'content'  => 'required',
+                'status'   => 'required'
+            ],[],$attr);
 
-        NewsModel::create($data);
+            $news      = NewsModel::create($data);
+            $html_data = view('news.row_news',compact($news))->render();
+            return response(['status' => true,'result' => $html_data]);
+        }
 //        session()->put('message','All Data Saved Successfully');
 //        session()->flash('message','All Data Saved Successfully');
         session()->push('message',['success' => 'data hase been saved successfully']);

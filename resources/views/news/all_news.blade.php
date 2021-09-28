@@ -17,7 +17,7 @@
     <div class="content">
         <div class="col-lg-4" style="float: left">
 
-            {!! Form::open(['url'=>'insert/news']) !!}
+            {!! Form::open(['url'=>'insert/news','id'=>'news']) !!}
             <div class="mb-3">
                 {!! Form::label('exampleFormControlInput1','News Title',['class'=>'form-label']) !!}
                 {!! Form::text('title',old('title'),['class'=>'form-control','id'=>'exampleFormControlInput1','placeholder'=>'News Title']) !!}
@@ -35,12 +35,17 @@
                 {!! Form::select('status',['active'=>'active','pending'=>'pending','dactive'=>'dactive'],old('status'),['class'=>'form-control','id'=>'exampleFormControlInput5','placeholder'=>'select status']) !!}
             </div>
             <div class="mb-3">
-                {!! Form::submit('Add New',['class'=>'btn btn-primary mb-3']) !!}
+                {!! Form::submit('Add New',['class'=>'btn btn-primary mb-3','id'=>'add_news']) !!}
             </div>
             {!! Form::close() !!}
 
         </div>
         <div class="col-lg-4" style="float: right">
+            <div class="alert_error text-center">
+                <h1></h1>
+                <ul></ul>
+            </div>
+
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -54,7 +59,6 @@
         <div class="col-lg-4" style="float: right">
             @if(session()->has('message'))
             <div class="alert alert-success">
-{{--                {{session()->get('message')}}--}}
                 {{session()->get('message')[0]['success']}}
                 {{session()->forget('message')}}
             </div>
@@ -68,7 +72,7 @@
         <div class="card-header card-header-warning col-lg-12" style="margin-bottom: 5px">
             <h4 class="card-title text-center">All Users</h4>
             <form method="post" action="{{ url('delete/news') }}">
-                <table class="table table-striped">
+                <table class="table table-striped list_news">
                     <tr class="text-center">
                         <th>Id</th>
                         <th>Title</th>
@@ -80,22 +84,11 @@
                         <th>Select</th>
                     </tr>
 
-                    @foreach($news as $new)
-                        <tr>
-                            <td>{{$new->id}}</td>
-                            <td>{{$new->title}}</td>
-                            <td>{{$new->desc}}</td>
-                            <td>{{$new->getUserName()->first()->name}}</td>
-                            <td>{{$new->content}}</td>
-                            <td>{{$new->status}}</td>
-                            <td>{{!empty($new->deleted_at)?'Trashed':'Published'}}</td>
-                            <td>
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="checkbox" name="id[]" value="{{$new->id}}">
-                            </td>
-                        </tr>
-                    @endforeach
+                    <tbody>
+                        @foreach($all_news as $news)
+                        @include('news.row_news')
+                        @endforeach
+                    </tbody>
                 </table>
                 <hr>
                 <input type="submit" name="delete" value="Soft Delete">
@@ -106,7 +99,7 @@
 
         <nav aria-label="...">
             <ul class="pagination">
-                {!! $news->render() !!}
+                {!! $all_news->render() !!}
             </ul>
         </nav>
     </div>

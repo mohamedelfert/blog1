@@ -33,5 +33,48 @@
                 text-transform: uppercase;
             }
         </style>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+            $(document).on('click','#add_news',function (){
+
+                var form = $('#news').serialize();
+                var url  = $('#news').attr('action');
+
+                $.ajax({
+
+                    url:url,
+                    dataType:'json',
+                    data:form,
+                    type:'post',
+                    beforeSend: function (){
+
+                        $('.alert_error h1').empty()
+                        $('.alert_error ul').empty()
+
+                    },success: function (data){
+
+                        if (data.status == true){
+                            $('.list_news tbody').append(data.result);
+                        }
+
+                    },error: function (data_error,exception){
+
+                        if (exception == 'error'){
+
+                            $('.alert_error h1').html(data_error.responseJSON.message)
+                            var list_error = '';
+                            $.each(data_error.responseJSON.errors,function (k,v){
+                                list_error += '<li>'+v+'</li>'
+                            });
+
+                            $('.alert_error ul').html(list_error)
+
+                        }
+                    }
+                })
+               return false;
+
+            });
+        </script>
     </head>
     <body>
