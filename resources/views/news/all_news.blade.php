@@ -70,7 +70,7 @@
         <hr>
 
         <div class="card-header card-header-warning col-lg-12" style="margin-bottom: 5px">
-            <h4 class="card-title text-center">All Users</h4>
+            <h4 class="card-title text-center">All News</h4>
             <form method="post" action="{{ url('delete/news') }}">
                 <table class="table table-striped list_news">
                     <thead>

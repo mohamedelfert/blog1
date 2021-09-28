@@ -37,7 +37,7 @@ class NewsController extends Controller
             ],[],$attr);
 
             $news      = NewsModel::create($data);
-            $html_data = view('news.row_news',compact($news))->render();
+            $html_data = view('news.row_news',['news' => $news])->render();
             return response(['status' => true,'result' => $html_data]);
         }
 //        session()->put('message','All Data Saved Successfully');
