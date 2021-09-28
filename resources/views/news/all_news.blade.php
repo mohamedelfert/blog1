@@ -73,17 +73,18 @@
             <h4 class="card-title text-center">All Users</h4>
             <form method="post" action="{{ url('delete/news') }}">
                 <table class="table table-striped list_news">
-                    <tr class="text-center">
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Add By</th>
-                        <th>Content</th>
-                        <th>Status</th>
-                        <th>Deleted Status</th>
-                        <th>Select</th>
-                    </tr>
-
+                    <thead>
+                        <tr class="text-center">
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Add By</th>
+                            <th>Content</th>
+                            <th>Status</th>
+                            <th>Deleted Status</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         @foreach($all_news as $news)
                         @include('news.row_news')
