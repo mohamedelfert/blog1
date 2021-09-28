@@ -15,7 +15,32 @@
     @endif
 
     <div class="content">
-        <div class="col-lg-4" style="float: left">
+
+        <div>
+            <div class="alert_error text-center">
+                <h1></h1>
+                <ul></ul>
+            </div>
+
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{session()->get('message')[0]['success']}}
+                    {{session()->forget('message')}}
+                </div>
+            @endif
+        </div>
+
+        <div class="col-lg-3.5" style="float: left">
 
             {!! Form::open(['url'=>'insert/news','id'=>'news']) !!}
             <div class="mb-3">
@@ -40,36 +65,8 @@
             {!! Form::close() !!}
 
         </div>
-        <div class="col-lg-4" style="float: right">
-            <div class="alert_error text-center">
-                <h1></h1>
-                <ul></ul>
-            </div>
 
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
-        <div class="col-lg-4" style="float: right">
-            @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{session()->get('message')[0]['success']}}
-                {{session()->forget('message')}}
-            </div>
-            @endif
-        </div>
-
-        <div class="clearfix"></div>
-
-        <hr>
-
-        <div class="card-header card-header-warning col-lg-12" style="margin-bottom: 5px">
+        <div class="card-header card-header-warning col-lg-8" style="margin-bottom: 5px;float: right;">
             <h4 class="card-title text-center">All News</h4>
             <form method="post" action="{{ url('delete/news') }}">
                 <table class="table table-striped list_news">

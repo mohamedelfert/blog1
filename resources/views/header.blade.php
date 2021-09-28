@@ -55,6 +55,7 @@
 
                         if (data.status == true){
                             $('.list_news tbody').append(data.result);
+                            $('#news')[0].reset();
                         }
 
                     },error: function (data_error,exception){
