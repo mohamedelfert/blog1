@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('news','NewsController@all_news');
-Route::post('insert/news','NewsController@insert_new');
-Route::delete('delete/news/{id?}','NewsController@delete')->where('id','[0-9]+');
+Route::group(['middleware' => 'news'],function (){
+    Route::get('news','NewsController@all_news');
+    Route::post('insert/news','NewsController@insert_new');
+    Route::delete('delete/news/{id?}','NewsController@delete')->where('id','[0-9]+');
+});
 
 //Route::resource('news' , 'NewsController');
 //Route::get('test', 'NewsController@index');
@@ -81,5 +83,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/manual/login','UsersController@login_get');
-Route::post('/manual/login','UsersController@login_post');
+Route::group(['middleware' => 'guest'],function (){
+    Route::get('/manual/login','UsersController@login_get');
+    Route::post('/manual/login','UsersController@login_post');
+});
+
