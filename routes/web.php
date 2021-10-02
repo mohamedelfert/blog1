@@ -80,3 +80,6 @@ Route::delete('delete/news/{id?}','NewsController@delete')->where('id','[0-9]+')
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/manual/login','UsersController@login_get');
+Route::post('/manual/login','UsersController@login_post');
