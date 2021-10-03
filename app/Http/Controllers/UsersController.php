@@ -14,7 +14,7 @@ class UsersController extends Controller
     public function login_post(){
         $remember = \request()->has('remember')? true:false;
         if (auth()->attempt(['name' => \request('name'),'password' => \request('password')], $remember)){
-            return redirect('home');
+            return redirect('news');
         }else{
             return back();
         }

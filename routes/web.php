@@ -17,11 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'news'],function (){
-    Route::get('news','NewsController@all_news');
-    Route::post('insert/news','NewsController@insert_new');
-    Route::delete('delete/news/{id?}','NewsController@delete')->where('id','[0-9]+');
-});
+//Route::group(['middleware' => 'news'],function (){
+    Route::get('news','NewsController@all_news')->middleware('news');
+    Route::post('insert/news','NewsController@insert_new')->middleware('news');
+    Route::delete('delete/news/{id?}','NewsController@delete')->where('id','[0-9]+')->middleware('news');
+//});
 
 //Route::resource('news' , 'NewsController');
 //Route::get('test', 'NewsController@index');
@@ -88,3 +88,10 @@ Route::group(['middleware' => 'guest'],function (){
     Route::post('/manual/login','UsersController@login_post');
 });
 
+Route::get('admin/path',function (){
+//    return App\AdminModel::all();
+    return Auth::guard('webAdmin')->user();
+})->middleware('AuthAdmin:webAdmin');
+
+Route::get('/admin/login','AdminController@login_get');
+Route::post('/admin/login','AdminController@login_post');

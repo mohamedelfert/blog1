@@ -41,6 +41,11 @@ return [
             'provider' => 'news',
         ],
 
+        'webAdmin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'news',
@@ -68,6 +73,11 @@ return [
         'news' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model'  => App\AdminModel::class,
         ],
 
         // 'news' => [

@@ -83,6 +83,7 @@
                 </div>
 
                 <div class="links">
+                    <a href="/admin/login">Admin Area</a>
                     <a href="/news">All News</a>
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>

@@ -13,7 +13,7 @@ class NewsController extends Controller
 //        $news = NewsModel::orderBy('id','desc')->get();
 //        $news = NewsModel::orderBy('id','desc')->get(['id','title','content']);
         $all_news        = NewsModel::withTrashed()->orderBy('id','desc')->paginate(10);
-        $trashed_news = NewsModel::onlyTrashed()->orderBy('id','desc')->paginate(10);
+        $trashed_news    = NewsModel::onlyTrashed()->orderBy('id','desc')->paginate(10);
         return view('news.all_news',compact('all_news','trashed_news'));
     }
 
