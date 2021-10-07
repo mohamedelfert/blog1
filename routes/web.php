@@ -89,9 +89,21 @@ Route::group(['middleware' => 'guest'],function (){
 });
 
 Route::get('admin/path',function (){
-//    return App\AdminModel::all();
-    return Auth::guard('webAdmin')->user();
+    return view('admin_area');
 })->middleware('AuthAdmin:webAdmin');
 
-Route::get('/admin/login','AdminController@login_get');
-Route::post('/admin/login','AdminController@login_post');
+Route::group(['middleware' => 'guest:webAdmin'], function (){
+    Route::get('/admin/login','AdminController@login_get');
+    Route::post('/admin/login','AdminController@login_post');
+});
+
+Route::get('admin/logout',function (){
+//    auth()->guard('webAdmin')->logout();
+    Auth::guard('webAdmin')->logout();
+    return redirect('admin/login');
+});
+
+Route::get('test/route',function (\Request $request){
+//    return $request::segment(2);
+    return $request::segments();
+});

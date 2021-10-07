@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'news',
+        'passwords' => 'users',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'news',
+            'provider' => 'users',
         ],
 
         'webAdmin' => [
@@ -48,7 +48,7 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'news',
+            'provider' => 'users',
         ],
     ],
 
@@ -70,7 +70,7 @@ return [
     */
 
     'providers' => [
-        'news' => [
+        'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
@@ -102,8 +102,14 @@ return [
     */
 
     'passwords' => [
-        'news' => [
-            'provider' => 'news',
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'admin' => [
+            'provider' => 'admin',
             'table' => 'password_resets',
             'expire' => 60,
         ],

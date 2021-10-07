@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in!
+                    <hr>
+                    @comment
                 </div>
             </div>
         </div>
