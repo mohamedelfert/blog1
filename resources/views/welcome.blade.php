@@ -79,6 +79,19 @@
 
             <div class="content">
 
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                {!! Form::open(['url' => 'upload/file','files'=>true]) !!}
+                {!! Form::file('file') !!}
+                {!! Form::submit('save') !!}
+                {!! Form::close() !!}
+
                 @check
                     <h1>You Are Visitor</h1>
                 @else

@@ -107,3 +107,5 @@ Route::get('test/route',function (\Request $request){
 //    return $request::segment(2);
     return $request::segments();
 });
+
+Route::post('upload/file','UploadController@upload');
