@@ -87,8 +87,13 @@
                     </ul>
                 </div>
 
-                {!! Form::open(['url' => 'upload/file','files'=>true]) !!}
-                {!! Form::file('file') !!}
+{{--                {!! Form::open(['url' => 'upload/file','files'=>true]) !!}--}}
+{{--                {!! Form::file('file[]',['multiple' => 'yes']) !!}--}}
+{{--                {!! Form::submit('save') !!}--}}
+{{--                {!! Form::close() !!}--}}
+
+                {!! Form::open(['url' => 'upload/file']) !!}
+                {!! Form::textarea('text') !!}
                 {!! Form::submit('save') !!}
                 {!! Form::close() !!}
 
