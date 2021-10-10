@@ -109,3 +109,14 @@ Route::get('test/route',function (\Request $request){
 });
 
 Route::post('upload/file','UploadController@upload');
+
+Route::get('event/test',function (){
+    event(new \App\Events\EventTest('This Data For Test 1'));
+});
+
+Route::get('mail/test',function (){
+    $job = (new \App\Jobs\sendMailJob())->delay(\Illuminate\Support\Carbon::now()->addSeconds(5));
+    dispatch($job);
+
+    return 'Message Send Successfully';
+});
