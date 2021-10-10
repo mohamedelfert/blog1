@@ -18,7 +18,7 @@ class CreateNewsModelsTable extends Migration
             $table->string('title');
             $table->string('desc');
             $table->integer('add_by')->unsigned();
-            $table->foreign('add_by')->references('id')->on('users');
+            $table->foreign('add_by')->references('id')->on('users')->onDelete('cascade');
             $table->longText('content');
             $table->enum('status',['active','pending','dactive']);
             $table->softDeletes();

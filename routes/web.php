@@ -120,3 +120,5 @@ Route::get('mail/test',function (){
 
     return 'Message Send Successfully';
 });
+
+Route::get('user/delete/{id}','UsersController@delete_user');

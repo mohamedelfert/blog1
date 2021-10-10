@@ -6,6 +6,7 @@
     <td>{{ $news->content }}</td>
     <td>{{ $news->status }}</td>
     <td>{{ !empty($new->deleted_at)?'Trashed':'Published' }}</td>
+    <td><a href="{{url('user/delete/' . $news->add_by)}}">Delete User</a></td>
     <td>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="DELETE">

@@ -80,6 +80,7 @@
                             <th>Status</th>
                             <th>Deleted Status</th>
                             <th>Select</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

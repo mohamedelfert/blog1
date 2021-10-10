@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,5 +19,10 @@ class UsersController extends Controller
         }else{
             return back();
         }
+    }
+
+    public function delete_user($id){
+        User::find($id)->delete();
+        return back();
     }
 }
