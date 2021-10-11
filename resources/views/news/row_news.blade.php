@@ -1,6 +1,6 @@
 <tr>
     <td>{{ $news->id }}</td>
-    <td>{{ $news->title }}</td>
+    <td><a href="{{url('news/' . $news->id)}}">{{ $news->title }}</a></td>
     <td>{{ $news->desc }}</td>
     <td>{{ $news->getUserName()->first()->name }}</td>
     <td>{{ $news->content }}</td>

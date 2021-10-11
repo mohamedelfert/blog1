@@ -122,3 +122,5 @@ Route::get('mail/test',function (){
 });
 
 Route::get('user/delete/{id}','UsersController@delete_user');
+Route::get('news/{id}','NewsController@show');
+Route::post('news/{id}','NewsController@add_comment');

@@ -14,4 +14,8 @@ class NewsModel extends Model
     public function getUserName(){
         return $this->hasOne(User::class,'id','add_by');
     }
+
+    public function comments(){
+        return $this->hasMany(commentsModel::class,'news_id','id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\commentsModel;
 use App\NewsModel;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -15,6 +16,19 @@ class NewsController extends Controller
         $all_news        = NewsModel::withTrashed()->orderBy('id','desc')->paginate(10);
         $trashed_news    = NewsModel::onlyTrashed()->orderBy('id','desc')->paginate(10);
         return view('news.all_news',compact('all_news','trashed_news'));
+    }
+
+    public function show($id){
+        $news = NewsModel::find($id);
+        return view('news.show_news',compact('news'));
+    }
+
+    public function add_comment($news_id){
+        $data = $this->validate(\request(),['comment' => 'required']);
+        $data['add_by'] = auth()->user()->id;
+        $data['news_id'] = $news_id;
+        commentsModel::create($data);
+        return back();
     }
 
     public function insert_new(Request $request){
