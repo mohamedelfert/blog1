@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\commentsModel;
 use App\NewsModel;
 
-class NewsController extends Controller
+class News extends Controller
 {
 
 }
