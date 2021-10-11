@@ -41,6 +41,7 @@
         </div>
 
         <div class="card-header card-header-warning col-lg-8" style="margin-bottom: 5px;float: right;">
+            <h5 class="card-title text-center"><a href="../news">All News</a></h5>
             <h4 class="card-title text-center">News Details</h4>
             <hr>
             <table class="table table-striped list_news">
@@ -59,7 +60,7 @@
                     </tr>
                 </tbody>
             </table>
-
+            <hr>
             @foreach($news->comments()->get() as $comment)
                 <h5>Add By : {{$comment->getUserName()->first()->name}}</h5>
                 <h5>Comment : {{$comment->comment}}</h5>
