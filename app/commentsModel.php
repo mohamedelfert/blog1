@@ -12,4 +12,8 @@ class commentsModel extends Model
     public function getUserName(){
         return $this->hasOne(User::class,'id','add_by');
     }
+
+    public function news_id(){
+        return $this->hasOne(NewsModel::class,'id','news_id');
+    }
 }

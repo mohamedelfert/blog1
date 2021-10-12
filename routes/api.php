@@ -20,7 +20,9 @@ Route::group(['namespace' => 'api'],function (){
 
     Route::group(['middleware' => 'auth:api'],function (){
         Route::get('/user', function (Request $request){ return $request->user(); });
-        Route::get('users', function (){ return \App\User::all(); });
+
+        Route::get('all/news','News@all_news');
+        Route::get('news/{news_id}','News@news_with_comment');
     });
 
     Route::get('login','Users@login');
