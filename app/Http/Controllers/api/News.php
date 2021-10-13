@@ -33,7 +33,7 @@ class News extends Controller
         ];
         $validate = Validator::make(request()->all(),$rules);
         if ($validate->fails()){
-            return Response(['status' => false,'message' => 'Sorry An Error Exists']);
+            return Response(['status' => false,'message' => $validate->messages()]);
         }else{
 //            $comment = new commentsModel;
 //            $comment->add_by = auth()->user()->id;
