@@ -25,12 +25,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('checkRole',function ($user){
-            if ($user->role == 'yes'){
-                return true;
-            }else{
-                return false;
-            }
-        });
+        Gate::define('checkRole','App\Policies\checkData@showData');
     }
 }

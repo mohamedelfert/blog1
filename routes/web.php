@@ -129,6 +129,6 @@ Route::get('user/role',function (){
     if (Gate::allows('checkRole',auth()->user())){
         return view('welcome');
     }else{
-        return 'Sorry Your are Not Allowed To access This Page';
+        return view('404');
     }
 });
