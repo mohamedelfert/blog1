@@ -105,6 +105,9 @@
 
                 <div class="title m-b-md">
                     Laravel
+                    @can('checkRole')
+                        Hello There!
+                    @endcan
                 </div>
 
                 <div class="links">

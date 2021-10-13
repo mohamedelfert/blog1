@@ -124,3 +124,11 @@ Route::get('mail/test',function (){
 Route::get('user/delete/{id}','UsersController@delete_user');
 Route::get('news/{id}','NewsController@show');
 Route::post('news/{id}','NewsController@add_comment');
+
+Route::get('user/role',function (){
+    if (Gate::allows('checkRole',auth()->user())){
+        return view('welcome');
+    }else{
+        return 'Sorry Your are Not Allowed To access This Page';
+    }
+});
