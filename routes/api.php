@@ -23,6 +23,7 @@ Route::group(['namespace' => 'api'],function (){
 
         Route::get('all/news','News@all_news');
         Route::get('news/{news_id}','News@news_with_comment');
+        Route::post('add/comment','News@add_comment');
     });
 
     Route::get('login','Users@login');
